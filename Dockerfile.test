@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
     wget \
     curl \
     firefox-esr \
+    xvfb\
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install GeckoDriver
@@ -29,4 +31,4 @@ RUN GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriv
 ENV DISPLAY=:99
 
 # Command to run on container start
-CMD ["python", "./test_html_elements.py"]
+CMD ["sh", "-c", "Xvfb :99 -screen 0 1024x768x16 & python ./test_html_elements.py"]
